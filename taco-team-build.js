@@ -254,6 +254,12 @@ function buildProject(cordovaPlatforms, args, /* optional */ projectPath) {
         cordovaVersion = version;
         return setupCordova();
     }).then(function (cordova) {
+        cordova.on('log', function(str) {
+          console.log("Log: " + str);
+        });
+        cordova.on('warn', function(str) {
+          console.log("Warn: " + str);
+        });
         return applyExecutionBitFix(cordovaPlatforms).then(function () {
             return Q(cordova);
         }, function (err) {
