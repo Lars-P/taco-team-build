@@ -267,15 +267,20 @@ function buildProject(cordovaPlatforms, args, /* optional */ projectPath) {
         var promise = _addPlatformsToProject(cordovaPlatforms, projectPath, cordova);
         //Build each platform with args in args object
         cordovaPlatforms.forEach(function (platform) {
+            console.log("DEBUG Platform: " + platform);
             promise = promise.then(function () {
+                console.log(2)
                 // Build app with platform specific args if specified
                 var callArgs = utilities.getCallArgs(platform, args, cordovaVersion);
                 return ensureProjectXcode8Compatibility(projectPath, platform, callArgs);
             }).then(function() {
+                console.log(3);
                 var callArgs = utilities.getCallArgs(platform, args, cordovaVersion);
                 var argsString = _getArgsString(callArgs.options);
                 console.log('Queueing build for platform ' + platform + ' w/options: ' + argsString);
                 return cordova.raw.build(callArgs);
+            }).catch(function (error) {
+              console.log(error);
             });
         });
 
