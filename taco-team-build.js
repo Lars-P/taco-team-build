@@ -224,6 +224,7 @@ function prepareProject(cordovaPlatforms, args, /* optional */ projectPath) {
 
 // Main build method
 function buildProject(cordovaPlatforms, args, /* optional */ projectPath) {
+    console.log("0");
     if (typeof (cordovaPlatforms) == 'string') {
         cordovaPlatforms = [cordovaPlatforms];
     }
@@ -262,6 +263,7 @@ function buildProject(cordovaPlatforms, args, /* optional */ projectPath) {
         return addSupportPluginIfRequested(cordova, defaultConfig);
     }).then(function (cordova) {
         // Add platforms if not done already
+        console.log("1");
         var promise = _addPlatformsToProject(cordovaPlatforms, projectPath, cordova);
         //Build each platform with args in args object
         cordovaPlatforms.forEach(function (platform) {
